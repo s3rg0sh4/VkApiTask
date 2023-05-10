@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
+using VkApiTask.Auth;
 using VkApiTask.DTOs;
 using VkApiTask.Entities;
+using VkApiTask.Filters;
 using VkApiTask.Services;
 
 namespace VkApiTask.Controllers
@@ -26,6 +28,8 @@ namespace VkApiTask.Controllers
 		}
 
 		[HttpGet]
+		[Authorize]
+		[Admin]
 		public async Task<IActionResult> GetUserByEmail(string login)
 		{
 			return Ok(await _userService.FindUser(login));
